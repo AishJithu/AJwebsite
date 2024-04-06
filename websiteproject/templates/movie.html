@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+   {{ movie.description|truncatewords:155 }}
+{% endblock %}
+
+{% block title %}
+   {% if category %}
+      {{ movie.name }}
+   {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row my_prod_row_class">
+<div class="row mx_auto">
+    <p><a href="{% url 'websiteapp:allMovieCat' %}">Home</a> | <a href="{{movie.category.get_url}}">{{movie.category}}</a>|{{movie.name}}</p>
+    </div>
+    <div class="container">
+        <br>
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <div style="min-width:18rem">
+            <img src="{{movie.poster.url}}" alt="{{movie.name}}" width="250px" height="250px">
+        </div>
+    </div>
+    <div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div>
+                <h1 class="my_prod_title">{{movie.name}}</h1>
+                <p class="text-justify my_prod_text">{{movie.desc}}</p>
+                <p>{{movie.release_date}}</p>
+                <p>{{movie.actors}}</p>
+                <p>{{movie.category}}</p>
+                <p>{{movie.trailer}}</p>
+            <a class="btn btn-secondary" href="{% url 'websiteapp:update' movie.id %}">Update</a>
+            <a class="btn btn-danger" href="{% url 'websiteapp:delete' movie.id %}">Delete</a>
+            <a class="btn btn-success" href="{% url 'websiteapp:addmovie' %}">ADD A MOVIE</a>
+                <a class="btn btn-success" href="{% url 'reviewapp:review_page' %}">REVIEW & RATING</a>
+
+
+        </div>
+    </div>
+    </div>
+</div>
+    </div>
+</div>
+{% endblock %}
